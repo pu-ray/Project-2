@@ -2,8 +2,10 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 
 from .forms import StudentForm
+
 from .models import Student
 
+from django.http import HttpResponse
 
 
 def add_student(request):
@@ -15,6 +17,9 @@ def add_student(request):
 		if form.is_valid():
 			form.save()
 			return redirect("list_students")
+
+		else:
+			return HttpResponse("invalid data", status=400)
 
 	else:
 		form = StudentForm()
@@ -44,6 +49,11 @@ def edit_student(request,pk):
 		form = StudentForm(instance = student)
 
 	return render(request,"edit_student.html",{"form":form})
+
+
+
+
+		
 
 
 

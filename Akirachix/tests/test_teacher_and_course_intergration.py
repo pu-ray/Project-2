@@ -18,21 +18,41 @@ class TeacherCourseTestCase(TestCase):
             id_number="756890435",
             date_joined = datetime.date.today(),
             )
+            
+            self.teacher_b = Teacher.objects.create(
+            first_name = "Jeff",
+            last_name = "Mwangi",
+            gender = "male",
+            phone_number = "0745890760",
+            proffessional="Designer",
+            subject="Python",
+            id_number="756890435",
+            date_joined = datetime.date.today(),
+            )
 
             self.python = Course.objects.create(
             name="Python",
             duration_of_course=9,
             start_date=datetime.date.today(),
             end_date=datetime.date.today(),
-            Description="backeneddeveloper",
+            Description="backeneddevelopement",
             )
+
+            self.java = Course.objects.create(
+            name="Java",
+            duration_of_course=7,
+            start_date=datetime.date.today(),
+            end_date=datetime.date.today(),
+            Description="backeneddevelopement",
+            )
+
 
             self.javascript = Course.objects.create(
             name="JavaScript",
             duration_of_course=7,
             start_date=datetime.date.today(),
             end_date=datetime.date.today(),
-            Description="fronteddeveloper",
+            Description="fronteddevelopement",
             )
 
             self.design = Course.objects.create(
@@ -40,16 +60,14 @@ class TeacherCourseTestCase(TestCase):
             duration_of_course=5,
             start_date=datetime.date.today(),
             end_date=datetime.date.today(),
-            Description="fronteddeveloper",
+            Description="fronteddevelopement",
             )
-    def test_teacher_can_teach_a_course(self):
-        self.teacher_a.courses.add(self.python)
-        self.assertEqual(self.teacher_a.courses.count(),1)
-        self.teacher_a.courses.add(self.javascript)
-        self.assertEqual(self.teacher_a.courses.count(),2)
-        self.teacher_a.courses.add(self.design)
-        self.assertEqual(self.teacher_a.courses.count(),3)
 
-    def test_teacher_can_teach_many_courses(self):
-        self.teacher_a.courses.add(self.python,self.javascript,self.design)
-        self.assertEqual(self.teacher_a.courses.count(),3)
+    def test_course_can_be_trained_by_a_teacher(self):
+       self.python.teacher = self.teacher_a
+       self.assertEqual(self.python.teacher, self.teacher_a)
+
+    def test_many_courses_can_be_trained_by_one_teacher(self):
+       self.python.teacher = self.teacher_b
+       self.javascript.teacher = self.teacher_b
+       self.assertEqual(self.javascript.teacher,self.python.teacher)

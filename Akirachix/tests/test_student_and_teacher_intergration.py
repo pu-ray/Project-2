@@ -24,7 +24,7 @@ class StudentTeacherTestCase(TestCase):
             first_name = "Jeff",
             last_name = "Mwangi",
             gender = "male",
-            e_mail = "stamatemwa@gmail.com",
+            e_mail = "mwangijeff@gmail.com",
             phone_number = "0745890760",
             proffessional="Web designer",
             subject="Web design",
